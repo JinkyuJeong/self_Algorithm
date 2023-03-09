@@ -1,3 +1,9 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.stream.IntStream;
 
 /*
 농부 존의 N마리의 소들이 있다.
@@ -33,7 +39,32 @@ i번째 소가 볼 수 있는 다른 소의 헤어 스타일은 i+1, i+2, .... �
 public class CowHair {
 
 	public static void main(String[] args) {
-		System.out.println(0.0/0);
+		Scanner sc = new Scanner(System.in);
+		Stack<Integer> stack = new Stack<>();
+		int cnt = 0;
+		
+		System.out.println("소의 마리수를 입력하세요.");
+		int[] temp = new int[sc.nextInt()];
+		
+		System.out.println("키를 입력하세요.");
+		while(cnt != 6) {
+			int height = sc.nextInt();
+			temp[cnt] = height; 
+			cnt++;
+		}
+		
+		cnt=0;
+		for(int i=0 ; i<temp.length -1; i++) {
+			for(int j=i ; j<temp.length-1; j++) {
+				if(temp[i] > temp[j+1]) {
+					stack.push(temp[j+1]);
+				}else break;
+			}
+			cnt+=stack.size();
+			stack.clear();
+		}
+		
+		System.out.println(cnt);
 	}
 
 }

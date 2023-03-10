@@ -1,6 +1,5 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedHashSet;
 
 /* 
 소수 찾기
@@ -25,42 +24,48 @@ numbers	return
 11과 011은 같은 숫자로 취급합니다.
  */
 public class FindPrimeNumber {
-	private static List<ArrayList<String>> comList = new ArrayList<>();
-
-	private static void combine(String[] nums, boolean[] checked, int start, int r ){
-		if(r==0) {
-			ArrayList<String> list = new ArrayList<>();
-			for(int i=0; i<nums.length; i++) {
-				if(checked[i]) list.add(nums[i]);
+	private static LinkedHashSet<Integer> comList = new LinkedHashSet<>();	// 소수를 담을 공간(중복 불가)
+	private static String s = "";		// 체크용 빈 문자열
+	
+	private static void combine(String numbers, boolean[] checked,  int r ){
+		if(r==s.length()) {
+			int num = Integer.parseInt(s);
+			int cnt=0;
+			// 소수(PrimeNumber) 체크 알고리즘
+			if(num != 1) {
+				for(int i=1 ; i<=num ; i++) {
+					if(num%i==0) cnt++;
+				}
+				if(cnt==2) comList.add(num);
 			}
-			comList.add(list);
-			return;
 		}
-
-		for(int i=start ; i<nums.length; i++) {
-			checked[i]=true;
-			combine(nums, checked, i+1, r-1);
-			checked[i]=false;
+		for(int i=0 ; i<numbers.length(); i++) {
+			// 값이 하나가 선택되면은 그 인덱스의 숫자는 다시 쓸 수 없게 checked를 해준다.
+			if(!checked[i]) {
+				checked[i]=true;
+				s+=numbers.charAt(i);
+				combine(numbers, checked, r);
+				checked[i]=false;		// 조합을 확인하고 나온 값의 인덱스는 재사용 가능하게 unchecked를 해준다.
+				s = "";	// 조합을 다 했으니 체크용 문자열은 빈 문자열로 바꿔준다.
+			}
 		}
-
 	}
+	
 	static int solution(String numbers) {
 		int answer = 0;
-		String[] strNum = numbers.split("");
-		
-		for(int i=0 ; i<strNum.length; i++) {
-			combine(strNum, new boolean[strNum.length], 0, i+1);
-			System.out.println(comList);
+		String[] num = numbers.split(""); 	// 출력할려고 만든거임 알고리즘에 사용 ㄴㄴ
+		for(int i=0 ; i<numbers.length(); i++) {
+			combine(numbers, new boolean[numbers.length()], i+1);
 		}
-		
-		
-
+		System.out.println(Arrays.toString(num) + "으로는 소수 " + comList  + "를 만들 수 있습니다.");
+		answer = comList.size();
+		comList.clear();
 		return answer;
 	}
 
 	public static void main(String[] args) {
 		System.out.println(solution("17"));
-//		System.out.println(solution("011"));
+		System.out.println(solution("011"));
 	}
 
 }

@@ -41,9 +41,9 @@ public class Skill {
 	 *  	3. 그 후 answer++로 가능한 스킬트리 수를 체크하여 리턴
 	 * */
 	private static boolean[] checked = new boolean[1000];	
-	private static void comp(char[] ch1, char[] ch2, int m, int n, int select) {
-		for(int i=m; i<ch1.length; i++) {
-			for(int j=n; j<ch2.length; j++) {
+	private static void comp(char[] ch1, char[] ch2, int select) {
+		for(int i=0; i<ch1.length; i++) {
+			for(int j=0; j<ch2.length; j++) {
 				if(ch1[i] == ch2[j]) {
 					checked[select] = true;
 					return;
@@ -55,19 +55,16 @@ public class Skill {
 	static int solution(String skill, String[] skill_trees) {
 		int answer = 0;
 		char[] ch = skill.toCharArray();
-		
+
 		for(int i=0; i<skill_trees.length; i++) {
-			for(int j=0; j<skill.length(); j++) {
-				if(skill_trees[i].indexOf(skill.charAt(j)) == -1){
-					char[] ch2 = skill_trees[i].toCharArray();
-					comp(ch, ch2, j, 0, i);
-					if(checked[i]) break;
-				}else {
-					char[] ch3 = skill_trees[i].substring(0, skill_trees[i].indexOf(skill.charAt(j))).toCharArray();
-					comp(ch, ch3, j, 0, i);
-					if(checked[i]) break;
-				}
+			if(skill_trees[i].indexOf(skill.charAt(0)) == -1){
+				char[] ch2 = skill_trees[i].toCharArray();
+				comp(ch, ch2, i);
+			}else {
+				char[] ch3 = skill_trees[i].substring(0, skill_trees[i].indexOf(skill.charAt(0))).toCharArray();
+				comp(ch, ch3, i);
 			}
+			
 			if(!checked[i]) {
 				System.out.println(skill_trees[i]);
 				answer++;
@@ -78,6 +75,6 @@ public class Skill {
 	public static void main(String[] args) {
 		System.out.println
 		("결과:" + solution
-			("CBD", new String[] { "BACDE", "CBADF", "AECB", "BDA" }));
+				("CBD", new String[] { "BACDE", "CBADF", "AECB", "BDA" }));
 	}
 }

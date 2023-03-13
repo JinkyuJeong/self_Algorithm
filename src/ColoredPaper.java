@@ -1,4 +1,10 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /*가로, 세로의 크기가 각각 100인 정사각형 모양의 흰색 도화지가 있다. 
 이 도화지 위에 가로, 세로의 크기가 각각 10인 정사각형 모양의 검은색 색종이를 색종이의 변과 도화지의 변이 평행하도록 붙인다. 
@@ -25,7 +31,7 @@ import java.util.Scanner;
 260
 */
 public class ColoredPaper {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		int[][] paper = new int[100][100];
 		Scanner sc = new Scanner(System.in);
 		System.out.println("색종이 갯수를 입력하세요.");
@@ -47,6 +53,43 @@ public class ColoredPaper {
 			}
 		}
 		System.out.println(cnt);
+		solution();
+	}
+	
+	// 수빈쓰가 풀으라고 시킨건데 나의 한계....
+	private static void solution() throws NumberFormatException, IOException {
+		int[][] paper = new int[100][100];
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("색종이 갯수를 입력하세요.");
+		int num = Integer.parseInt(br.readLine());
+		System.out.println("각 종이의 위치를 입력하세요.");
+		String[] arr = new String[num];
+		for(int i=0; i<num;i++) {
+			arr[i] = br.readLine(); 
+		}
+	
+		List<Integer> list = 
+			Arrays.asList(arr)
+				.stream()
+				.map(s->{
+					String[] arr2 = s.split(" ");
+					int cnt=0;
+					int left = Integer.parseInt(arr2[0]);
+					int bottom = Integer.parseInt(arr2[1]);
+					for(int m=100-left; m>100-left-10; m--) {
+						for(int n=bottom; n<bottom+10; n++) {
+							paper[m][n] = 1;
+						}
+					}
+					for(int i=0; i<100; i++) {
+						for(int j=0; j<100; j++) {
+							if(paper[i][j] == 1) cnt++;
+						}
+					}
+					return cnt;
+				})
+				.collect(Collectors.toList());
+			System.out.println(list.get(num-1));
 	}
 
 }

@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
 /*프로그래밍 문제를 풀다 보면 뒤죽박죽인 N개의 데이터를 숫자의 크기 순으로 0 ~ N-1까지의 숫자로 재정렬 해야되는 경우가 종종 있다.
 예를 들어 N=5 이고,
 50 23 54 24 123
@@ -23,8 +26,25 @@
 public class DataSorted {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		Scanner sc = new Scanner(System.in);
+		System.out.println("데이터 개수 N을 입력해주세요.");
+		int N = sc.nextInt();
+		System.out.println("숫자 N개를 입력해주세요.");
+		int[] nums = new int[N];
+		for(int i=0 ;i<N; i++)
+			nums[i] = sc.nextInt();
+		int[] copyNums = Arrays.copyOf(nums,N);
+		Arrays.sort(nums);
+		int[] temp = new int[N];
+		for(int i=0 ; i<N; i++) {
+			for(int j=0 ; j<N; j++) {
+				if(copyNums[i]==nums[j]) {
+					temp[i] = j;
+				}
+			}
+		}
+		for(int a : temp)
+			System.out.print(a+" ");
 	}
 
 }

@@ -55,7 +55,7 @@ public class ProgrammersTeam {
 		return answer;
 	}
 	public static void main(String[] args) {
-		for(int i : solution(new int[] {93,30,55,10,50}, new int[] {1,30,5,2,10})) {
+		for(int i : solution(new int[] {93,30,55}, new int[] {1,30,5})) {
 			System.out.print(i + ",");
 		}
 		System.out.println();

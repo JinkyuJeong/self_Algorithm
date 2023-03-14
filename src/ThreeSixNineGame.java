@@ -20,8 +20,9 @@ public class ThreeSixNineGame {
 		long s = System.currentTimeMillis();
 
 		
+		
 		long e = System.currentTimeMillis();
-		System.out.println((e-s)/1000);
+		System.out.println("실행시간 : "+((e-s)/1000)+"초");
 
 	}
 }

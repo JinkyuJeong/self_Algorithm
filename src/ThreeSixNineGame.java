@@ -15,7 +15,7 @@
 1 100000000
 <출력예시2>
 240000000 
-실행시간 : 3초
+실행시간 : 1초
 */
 public class ThreeSixNineGame {
 	public static void main(String[] args)  {

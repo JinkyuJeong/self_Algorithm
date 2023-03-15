@@ -1,4 +1,6 @@
+import java.util.Arrays;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /*
 ×9 격자판에 쓰여진 81개의 자연수 또는 0이 주어질 때, 
@@ -30,14 +32,11 @@ public class FindMaxNum {
 										{47,47,70,45,23,65,3,41,44},
 										{87,13,82,38,31,12,29,29,80}};
 	public static void main(String[] args) {
-		int max=IntStream.of(arr[0]).max().getAsInt();
+		int max=Stream.of(arr).flatMapToInt(Arrays::stream).max().getAsInt();
 		String s = "";
-		for(int i=1; i<arr.length; i++) {
-			if(max<IntStream.of(arr[i]).max().getAsInt()) {
-				max = IntStream.of(arr[i]).max().getAsInt();
+		for(int i=0; i<arr.length; i++) {
 				for(int j=0; j<arr[i].length; j++) {
 					if(max==arr[i][j])  s=(i+1)+" "+(j+1);
-				}
 			}
 		}
 		System.out.println(max+"\n"+s);

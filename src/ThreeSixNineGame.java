@@ -5,26 +5,38 @@
 3. 그 외의 숫자들은 박수를 치지 않는다.
 아주 큰 범위의 테스트 데이터가 입력된다.
 
-<입력예시>
-3 16
-<출력예시>
+<출력 결과>
 5 
-실행시간 : 1초
-
-<입력예시2>
-1 100000000
-<출력예시2>
+실행시간 : 0초
+13
+실행시간 : 0초
 240000000 
-실행시간 : 1초
-*/
-public class ThreeSixNineGame {
-	public static void main(String[] args)  {
-		long s = System.currentTimeMillis();
+실행시간 : 0초
 
+
+ */
+public class ThreeSixNineGame {
+	public static void main(String[] args){
+		solution(3, 16);
+		solution(30, 39);
+		solution(1, 100000000);
+	}
+
+	private static void solution(int start, int end) {
+		long s = System.currentTimeMillis();
 		
+		long cnt=0;
+		int[] temp = new int[end+1];
+		for(int i=1 ; i<10; i++) {
+			temp[i] = i%3 == 0? 1:0;
+		}
+		for(int i=1 ; i<=end; i++) {
+			if(i>=10)temp[i] = temp[i/10] + ((i%10)%3 == 0? (i%10)>0 ? 1:0:0);
+			if(i>=start) cnt+=temp[i];
+		}
+		System.out.println(cnt);
 		
 		long e = System.currentTimeMillis();
 		System.out.println("실행시간 : "+((e-s)/1000)+"초");
-
 	}
 }

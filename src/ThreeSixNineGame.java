@@ -8,12 +8,14 @@
 <입력예시>
 3 16
 <출력예시>
-5 (제한시간 0~1초대 출력)
+5 
+실행시간 : 1초
 
 <입력예시2>
 1 100000000
 <출력예시2>
-240000000 (제한시간 3~4초대 출력)
+240000000 
+실행시간 : 3초
 */
 public class ThreeSixNineGame {
 	public static void main(String[] args)  {

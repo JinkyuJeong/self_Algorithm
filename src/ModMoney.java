@@ -11,12 +11,17 @@
 public class ModMoney {
 	private static int solution(int money) {
 		int answer = 0;
+		int[] m = {50000, 10000, 5000, 1000, 500, 100, 50, 10};
+		for(int i=0; i<m.length; i++) {
+			answer+=money/m[i];
+			money%=m[i];
+		}
 		
 		return answer;
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(solution(54520));
+		System.out.println(solution(40010));
 	}
 
 }

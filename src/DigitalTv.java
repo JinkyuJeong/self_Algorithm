@@ -31,7 +31,8 @@ public class DigitalTv {
 		for(int i=0; i<channel.length; i++) {
 			if(channel[i].equalsIgnoreCase("KBS1")) {
 				kbs1idx=i;
-				if(kbs1idx ==1000) return null; 
+				if(kbs1idx ==1000) return null;
+				if(kbs1idx == 0) break;
 				
 				int tempIdx = kbs1idx;
 				while(tempIdx != 0) {
@@ -52,7 +53,8 @@ public class DigitalTv {
 		for(int i=0; i<channel.length; i++) {
 			if(channel[i].equalsIgnoreCase("KBS2")) {
 				kbs2idx=i;
-				if(kbs2idx ==1000) return null; 
+				if(kbs2idx ==1000) return null;
+				if(kbs2idx == 0) break;
 				
 				int tempIdx = kbs2idx;
 				while(tempIdx != 0) {

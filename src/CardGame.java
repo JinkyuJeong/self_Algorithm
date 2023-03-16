@@ -29,7 +29,7 @@ public class CardGame {
 	}
 
 	public static void main(String[] args) {
-		solution(6);
+		System.out.println(solution(6));
 	}
 
 }

@@ -47,9 +47,18 @@ public class RemoteControl {
 		}
 
 		if(diff>=1) {
-			while(diff>=1) {
-				diff-=1;
+			if(diff%5 >= 3) {
+				diff-=5;
 				answer++;
+				while(diff!=0) {
+					diff+=1;
+					answer++;
+				}
+			}else {
+				while(diff>=1) {
+					diff-=1;
+					answer++;
+				}
 			}
 		}
 
@@ -59,7 +68,7 @@ public class RemoteControl {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(solution(7, 34));
+		System.out.println(solution(15, 23));
 	}
 
 }

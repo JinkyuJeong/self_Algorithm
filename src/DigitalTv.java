@@ -50,7 +50,7 @@ public class DigitalTv {
 			}
 		}
 		
-		for(int i=0; i<channel.length; i++) {
+		for(int i=1; i<channel.length; i++) {
 			if(channel[i].equalsIgnoreCase("KBS2")) {
 				kbs2idx=i;
 				if(kbs2idx ==1000) return null;

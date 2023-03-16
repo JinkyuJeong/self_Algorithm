@@ -24,12 +24,57 @@ KBS1
 */
 public class DigitalTv {
 	public static String solution(String[] channel) {
+		StringBuffer sb = new StringBuffer();
+		int kbs1idx=1000;
+		int kbs2idx=1000;
 		
-		return null;
+		for(int i=0; i<channel.length; i++) {
+			if(channel[i].equalsIgnoreCase("KBS1")) {
+				kbs1idx=i;
+				if(kbs1idx ==1000) return null; 
+				
+				int tempIdx = kbs1idx;
+				while(tempIdx != 0) {
+					sb.append(1);
+					tempIdx--;
+				}
+				while(kbs1idx != 0) {
+					sb.append(4);
+					String tempString ="";
+					tempString=channel[kbs1idx];
+					channel[kbs1idx] = channel[kbs1idx-1];
+					channel[kbs1idx-1] = tempString;
+					kbs1idx--;
+				}
+			}
+		}
+		
+		for(int i=0; i<channel.length; i++) {
+			if(channel[i].equalsIgnoreCase("KBS2")) {
+				kbs2idx=i;
+				if(kbs2idx ==1000) return null; 
+				
+				int tempIdx = kbs2idx;
+				while(tempIdx != 0) {
+					sb.append(1);
+					tempIdx--;
+				}
+				while(kbs2idx != 1) {
+					sb.append(4);
+					String tempString ="";
+					tempString=channel[kbs2idx];
+					channel[kbs2idx] = channel[kbs2idx-1];
+					channel[kbs2idx-1] = tempString;
+					kbs2idx--;
+				}
+			}
+		}
+		
+		return sb.toString();
 	}
 
 	public static void main(String[] args) {
-		System.out.println(solution(new String[] {"ABC1", "ABC02", "KBS2","KBS1"}));
+		System.out.println(solution(new String[] {"ABC1", "ABC02", "KBS2", "MBC", "KBS1"}));
 	}
 
 }

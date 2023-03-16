@@ -25,6 +25,25 @@
 public class RemoteControl {
 	private static int solution(int a, int b) {
 		int answer = 0;
+		int diff = b-a;
+		while(diff !=0) {
+			if(diff>=10) {
+				diff-=10;
+				answer++;
+			}
+			if(diff>=5) {
+				diff-=5;
+				answer++;
+			}
+			if(diff>=1) {
+				diff-=1;
+				answer++;
+			}
+			if(diff<=-1) {
+				diff+=1;
+				answer++;
+			}
+		}
 		
 		return answer;
 	}

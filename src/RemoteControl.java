@@ -21,33 +21,43 @@
 7 34
 <출력예시>
 5
-*/
+ */
 public class RemoteControl {
 	private static int solution(int a, int b) {
 		int answer = 0;
-		int diff = b-a;
-		while(diff !=0) {
-			if(diff>=10) {
+		int diff = Math.abs(b-a);
+
+		if(diff>=10) {
+			while(diff>=10) {
 				diff-=10;
 				answer++;
 			}
-			if(diff>=5) {
+		}
+
+		if(diff>=5) {
+			if(diff%5 >= 3) {
+				diff-=10;
+				diff = Math.abs(diff);
+				answer++;
+			}
+			while(diff>=5) {
 				diff-=5;
 				answer++;
 			}
-			if(diff>=1) {
+		}
+
+		if(diff>=1) {
+			while(diff>=1) {
 				diff-=1;
 				answer++;
 			}
-			if(diff<=-1) {
-				diff+=1;
-				answer++;
-			}
 		}
-		
+
+
+
 		return answer;
 	}
-	
+
 	public static void main(String[] args) {
 		System.out.println(solution(7, 34));
 	}

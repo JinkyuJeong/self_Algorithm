@@ -15,24 +15,20 @@
 현재 채널 리스트의 순서가 주어졌을 때, KBS1를 첫 번째로, KBS2를 두 번째로 순서를 바꾸는 방법을 구하는 프로그램을 작성하시오. 
 방법의 길이는 500보다 작아야 한다. 두 채널을 제외한 나머지 채널의 순서는 상관없다.
 <입력>					<출력>
-MBC							33
-KBS1
-KBS2
-==================
-ABC1					11144411144 or 33144413
+ABC1					11144411144
 ABC02
 KBS2
 KBS1
 
+정답은 여러가지 입니다. 1~4번 버튼을 잘 이용해서 푸세요
 */
-public class AnalogTV {
+public class DigitalTv {
 	public static String solution(String[] channel) {
 		
 		return null;
 	}
 
 	public static void main(String[] args) {
-		System.out.println(solution(new String[] {"MBC", "KBS1", "KBS2"}));
 		System.out.println(solution(new String[] {"ABC1", "ABC02", "KBS2","KBS1"}));
 	}
 

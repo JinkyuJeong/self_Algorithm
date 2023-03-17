@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 /*N장의 카드가 있다. 각각의 카드는 차례로 1부터 N까지의 번호가 붙어 있으며, 1번 카드가 제일 위에, N번 카드가 제일 아래인 상태로 순서대로 카드가 놓여 있다.
 이제 다음과 같은 동작을 카드가 한 장 남을 때까지 반복하게 된다. 우선, 제일 위에 있는 카드를 바닥에 버린다. 
 그 다음, 제일 위에 있는 카드를 제일 아래에 있는 카드 밑으로 옮긴다.
@@ -21,15 +24,29 @@ public class CardGame {
 		long s = System.currentTimeMillis();
 		
 		int answer = 0;
-
+		Queue<Integer> q = new LinkedList<>();
+		for(int i=1; i<=N; i++) {
+			q.offer(i);
+		}
+		int cnt=1;
+		while(q.size() != 1) {
+			if(cnt%2==1) {
+				q.poll();
+				cnt++;
+			}else {
+				q.offer(q.poll());
+				cnt++;
+			}
+		}
+		
 		long e = System.currentTimeMillis();
 		System.out.println("실행시간 : "+((e-s)/1000)+"초");
 		
-		return answer;
+		return answer=q.poll();
 	}
 
 	public static void main(String[] args) {
-		System.out.println(solution(6));
+		System.out.println(solution(100000000));
 	}
 
 }

@@ -14,11 +14,37 @@ SK
 */
 public class RockGame1 {
 	private static void solution(int N) {
-		
+		int[] select = {1,3};
+		int cnt=1;
+		while(true) {
+			if(cnt%2==1) {
+				int temp = select[(int)Math.random()*2];
+				if(N>=temp) {
+					N-=temp;
+					continue;
+				}
+				cnt++;
+				if(N<=0) {
+					System.out.println("SK");
+					break;
+				}
+			}else {
+				int temp = select[(int)Math.random()*2];
+				if(N>=temp) {
+					N-=temp;
+					continue;
+				}
+				cnt++;
+				if(N<=0) {
+					System.out.println("CY");
+					break;
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) {
-		solution(4);
+		solution(7);
 	}
 
 }

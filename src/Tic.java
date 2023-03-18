@@ -1,7 +1,4 @@
-package Solving;
 import java.util.Arrays;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /*
@@ -99,10 +96,10 @@ public class Tic {
 			}else {
 				for(int i=0; i<3; i+=2) {
 					if(board2[1][i].equals("O")) {
-						if(board2[0][i].equals("O") && board2[2][i].equals("O")) answer=check(x);
+						if(board2[0][i].equals("O") && board2[2][i].equals("O"))  {answer=check(x); break;}
 						else answer =1;
 					}else if(board2[1][i].equals("X")) {
-						if(board2[0][i].equals("X") && board2[2][i].equals("X")) answer=check2(o);
+						if(board2[0][i].equals("X") && board2[2][i].equals("X"))  {answer=check2(o); break;}
 						else answer =1;
 					}
 				}

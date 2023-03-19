@@ -69,7 +69,7 @@ public class Tic {
 		}
 		System.out.println("o : " + o + ", x : " + x);
 		
-		if(o-x <0) return answer=0;
+		if(o-x <0 || o-x>=2) return answer=0;
 		else if(o+x>=5&& o-x <=1){
 			if(board2[1][1].equals("O")) {
 				if(board2[0][0].equals("O") && board2[2][2].equals("O")) answer=check(x);
@@ -114,5 +114,6 @@ public class Tic {
 		System.out.println(solution(new String[] {"OOO","...","XXX"} ));
 		System.out.println(solution(new String[] {"...",".X.","..."} ));
 		System.out.println(solution(new String[] {"...","...","..."} ));
+		System.out.println(solution(new String[] {"OXO","X.X","OXO"} ));
 	}
 }

@@ -115,5 +115,7 @@ public class Tic {
 		System.out.println(solution(new String[] {"...",".X.","..."} ));
 		System.out.println(solution(new String[] {"...","...","..."} ));
 		System.out.println(solution(new String[] {"OXO","X.X","OXO"} ));
+		System.out.println(solution(new String[] {"OOX","X.X","XOO"} ));
+		System.out.println(solution(new String[] {"OOX",".X.","X.O"} ));
 	}
 }

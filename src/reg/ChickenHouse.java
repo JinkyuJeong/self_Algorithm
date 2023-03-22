@@ -1,4 +1,7 @@
 package reg;
+
+import java.util.ArrayList;
+
 /*크기가 N×N인 도시가 있다. 도시는 1×1크기의 칸으로 나누어져 있다. 
 도시의 각 칸은 빈 칸, 치킨집, 집 중 하나이다. 도시의 칸은 (r, c)와 같은 형태로 나타내고, 
 r행 c열 또는 위에서부터 r번째 칸, 왼쪽에서부터 c번째 칸을 의미한다. r과 c는 1부터 시작한다.
@@ -33,10 +36,30 @@ r행 c열 또는 위에서부터 r번째 칸, 왼쪽에서부터 c번째 칸을 
 
 */
 public class ChickenHouse {
+	private static ArrayList<XY> chicken; 
+	private static ArrayList<XY> house;
+	static class XY{
+		int x,y;
+		public XY(int x, int y) {
+			this.x=x+1;
+			this.y=y+1;
+		}
+	}
 	private static int solution(int[][] map, int M) {
+		chicken = new ArrayList<>();
+		house = new ArrayList<>();
+		for(int i=0; i<map.length; i++) {
+			for(int j=0; j<map.length; j++) {
+				if(map[i][j]==1) house.add(new XY(i,j));
+				else if(map[i][j]==2) chicken.add(new XY(i,j));
+			}
+		}
 		
 		
 		return 0;
+	}
+	private static int combine() {
+		
 	}
 	public static void main(String[] args) {
 		System.out.println(solution(new int[][] { {0,0,1,0,0}
@@ -59,6 +82,7 @@ public class ChickenHouse {
                                                                   ,{1,2,0,2,1}
                                                                   ,{1,2,0,2,1}
                                                                   ,{1,2,0,2,1} }, 1));	// 출력 : 32
+	
 	}
-
+	
 }

@@ -16,7 +16,6 @@ public class PrimeFactors {
 		if(N != 1) {
 			System.out.println(N);
 		}
-		
 	}
 
 }

@@ -36,9 +36,9 @@ r행 c열 또는 위에서부터 r번째 칸, 왼쪽에서부터 c번째 칸을 
 
 */
 public class ChickenHouse {
-	private static ArrayList<XY> chicken; 
-	private static ArrayList<XY> house;
-	private static int ans=0;
+	static ArrayList<XY> chicken; 
+	static ArrayList<XY> house;
+	static int ans=0;
 	static class XY{
 		int x,y;
 		public XY(int x, int y) {
@@ -46,7 +46,7 @@ public class ChickenHouse {
 			this.y=y+1;
 		}
 	}
-	private static int solution(int[][] map, int M) {
+	static int solution(int[][] map, int M) {
 		chicken = new ArrayList<>();
 		house = new ArrayList<>();
 		for(int i=0; i<map.length; i++) {

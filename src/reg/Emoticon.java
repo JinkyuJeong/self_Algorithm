@@ -1,4 +1,9 @@
 package reg;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 /*
  * 카카오톡에서는 이모티콘을 무제한으로 사용할 수 있는 이모티콘 플러스 서비스 가입자 수를 늘리려고 합니다.
 이를 위해 카카오톡에서는 이모티콘 할인 행사를 하는데, 목표는 다음과 같습니다.
@@ -35,12 +40,44 @@ n명의 카카오톡 사용자들에게 이모티콘 m개를 할인하여 판매
 카카오톡 사용자 n명의 구매 기준을 담은 2차원 정수 배열 users, 이모티콘 m개의 정가를 담은 1차원 정수 배열 emoticons가 주어집니다. 
 이때, 행사 목적을 최대한으로 달성했을 때의 이모티콘 플러스 서비스 가입 수와 이모티콘 매출액을 1차원 정수 배열에 담아 return 하도록 solution 함수를 완성해주세요.*/
 public class Emoticon {	
+	static ArrayList<int[]> tlist = new ArrayList<>();
 	static int[] solution(int[][] users, int[] emoticons) {
-        int[] answer = {};
-        return answer;
-    }
+		int[] answer = new int[2];
+		
+		ArrayList<Integer> list = new ArrayList<>();
+		for(int i=0; i<users.length; i++) {
+			list.add(users[i][0]);
+		}
+		int min = ((Collections.min(list)/10)+1)*10;
+		list.clear();
+		while(min<=40) {
+			list.add(min);
+			min+=10;
+		}
+		System.out.println(list);
+		for(int i=0; i<list.size(); i++) {
+			for(int j=0; j<list.size(); j++) {
+				int[] add = {list.get(i), list.get(j)};
+				tlist.add(add);
+			}
+		}
+		for(int i=0; i<tlist.size();i++) {
+			int[] temp = tlist.get(i);
+			int join=0;
+			int amount=0;
+			for(int j=0; j<users.length; j++) {
+				if(users[j][0]>temp[0]) continue;
+				else {
+					
+				}
+			}
+		}
+		
+		return answer;
+	}
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		System.out.println(Arrays.toString(solution(new int[][] {{40,10000}, {25,10000}}, 
+																								new int[] {7000,9000})));
 	}
 }

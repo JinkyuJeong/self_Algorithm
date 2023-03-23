@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 /*
@@ -43,22 +42,19 @@ import java.util.stream.Stream;
  * https://school.programmers.co.kr/learn/courses/30/lessons/160585?language=java
  */
 public class Tic {
-	private static String[][] board2;
-	private static int check(int n) {
-		if(n==2) return 1;
-		else return 0;
-	}
-	private static int check2(int n) {
-		if(n==3) return 1;
-		else return 0;
+	static String[][] board2;
+	static int check(String mark) {
+		int cnt=0;
+		for(int i=0; i<board2.length; i++) {
+			if(mark.equals(board2[0][i]) && board2[0][i].equals(board2[1][i]) && board2[1][i].equals(board2[2][i])) cnt++;
+			if(mark.equals(board2[i][0]) && board2[i][0].equals(board2[i][1]) && board2[i][1].equals(board2[i][2])) cnt++;
+		}
+		if(mark.equals(board2[0][0]) && board2[0][0].equals(board2[1][1]) && board2[1][1].equals(board2[2][2])) cnt++;
+		if(mark.equals(board2[0][2]) && board2[0][2].equals(board2[1][1]) && board2[1][1].equals(board2[2][0])) cnt++;
+		return cnt;
 	}
 	static int solution(String[] board) {
-		int answer = -1;
-
 		board2 = Stream.of(board).map(s->s.split("")).toArray(String[][]::new);
-
-		for(String[] ss : board2) 
-			System.out.println(Arrays.toString(ss));
 		
 		int o=0, x=0;
 		for(int i=0; i<3; i++) {
@@ -67,55 +63,23 @@ public class Tic {
 				if(board2[i][j].equals("X")) x++;
 			}
 		}
-		System.out.println("o : " + o + ", x : " + x);
-		
-		if(o-x <0 || o-x>=2) return answer=0;
-		else if(o+x>=5&& o-x <=1){
-			if(board2[1][1].equals("O")) {
-				if(board2[0][0].equals("O") && board2[2][2].equals("O")) answer=check(x);
-				else if(board2[0][2].equals("O") && board2[2][0].equals("O")) answer=check(x);
-				else if(board2[0][1].equals("O") && board2[2][1].equals("O")) answer=check(x);
-				else if(board2[1][0].equals("O") && board2[1][2].equals("O")) answer=check(x);
-				else answer=1;
-			}else if(board2[1][1].equals("X")) {
-				if(board2[0][0].equals("X") && board2[2][2].equals("X")) answer=check2(o);
-				else if(board2[0][2].equals("X") && board2[2][0].equals("X")) answer=check2(o);
-				else if(board2[0][1].equals("X") && board2[2][1].equals("X")) answer=check2(o);
-				else if(board2[1][0].equals("X") && board2[1][2].equals("X")) answer=check2(o);
-				else answer=1;
-			}else if(board2[0][1].equals("O") || board2[0][1].equals("X") || board2[2][1].equals("O") || board2[0][1].equals("X")){
-				for(int i=0; i<3; i+=2) {
-					if(board2[i][1].equals("O")) {
-						if(board2[i][0].equals("O") && board2[i][2].equals("O")) {answer=check(x); break;}
-						else answer = 1;
-					}else if(board2[i][1].equals("X")) {
-						if(board2[i][0].equals("X") && board2[i][2].equals("X")) {answer=check2(o); break;}
-						else answer =1;
-					}
-				}
-			}else {
-				for(int i=0; i<3; i+=2) {
-					if(board2[1][i].equals("O")) {
-						if(board2[0][i].equals("O") && board2[2][i].equals("O"))  {answer=check(x); break;}
-						else answer =1;
-					}else if(board2[1][i].equals("X")) {
-						if(board2[0][i].equals("X") && board2[2][i].equals("X"))  {answer=check2(o); break;}
-						else answer =1;
-					}
-				}
-			}
-		}
-		else if(o+x<5 && (o-x==0 || o-x==1)) answer=1;
-		
-		return answer;
+
+		if(x>o || o-x>1) return 0;
+		else if(o+x==9 && check("O") > 1) return 1;
+		else if(check("O") + check("X") > 1) return 0;
+		else if(check("O") == 1 && o==x) return 0;
+		else if(check("X") == 1 && o!=x) return 0;
+		else return 1;
 	}
 	public static void main(String[] args) {
-		System.out.println(solution(new String[] {"O.X",".O.","..X"} ));
-		System.out.println(solution(new String[] {"OOO","...","XXX"} ));
-		System.out.println(solution(new String[] {"...",".X.","..."} ));
-		System.out.println(solution(new String[] {"...","...","..."} ));
-		System.out.println(solution(new String[] {"OXO","X.X","OXO"} ));
-		System.out.println(solution(new String[] {"OOX","X.X","XOO"} ));
-		System.out.println(solution(new String[] {"OOX",".X.","X.O"} ));
+		System.out.println(solution(new String[] {"O.X",".O.","..X"} ));			// 1
+		System.out.println(solution(new String[] {"OOO","...","XXX"} ));		// 0
+		System.out.println(solution(new String[] {"...",".X.","..."} ));				// 0
+		System.out.println(solution(new String[] {"...","...","..."} ));				// 1
+		System.out.println(solution(new String[] {"OXO","X.X","OXO"} ));	// 1
+		System.out.println(solution(new String[] {"OOX","X.X","XOO"} ));	// 1
+		System.out.println(solution(new String[] {"OOX",".X.","X.O"} ));		// 1
+		System.out.println(solution(new String[] {"OX.","OX.","OX."} ));		// 0
+		System.out.println(solution(new String[] {"OX.","OXX","O.."} ));		// 0
 	}
 }

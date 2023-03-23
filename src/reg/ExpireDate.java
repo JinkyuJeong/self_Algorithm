@@ -1,3 +1,4 @@
+package reg;
 
 
 import java.util.ArrayList;
@@ -74,39 +75,7 @@ public class ExpireDate {
 		String[][] terms_1 = Stream.of(terms).map(s->s.split(" ")).toArray(String[][]::new);
 
 		for(int i=0; i<privacies.length; i++) {
-			String pDay_t = privacies[i].split(" ")[0];
-			String[] pDay = pDay_t.split("\\.");
-			String t = privacies[i].split(" ")[1];
-			StringBuffer sb = null;
-
-			for(int j=0; j<terms_1.length; j++) {
-				if(t.equals(terms_1[j][0])) {
-					sb = new StringBuffer();
-					if((Integer.parseInt(pDay[1])+Integer.parseInt(terms_1[j][1]))>12) {
-						sb.append(Integer.parseInt(pDay[0])+1+".");
-						sb.append((Integer.parseInt(pDay[1])+Integer.parseInt(terms_1[j][1])-12)+".");
-						sb.append(pDay[2]);
-					}else {
-						sb.append(pDay[0]+".");
-						sb.append(Integer.parseInt(pDay[1])+Integer.parseInt(terms_1[j][1])+".");
-						sb.append(pDay[2]);
-					}
-				}
-			}
-
-			String[] newDay = sb.toString().split("\\.");
-
-			if(Integer.parseInt(tDay[0])<Integer.parseInt(newDay[0])) continue;
-			if(Integer.parseInt(tDay[1])<Integer.parseInt(newDay[1])) {
-				if(Integer.parseInt(tDay[0])<=Integer.parseInt(newDay[0])) continue;
-			}
-			if(Integer.parseInt(tDay[2])<Integer.parseInt(newDay[2])) {
-				if(Integer.parseInt(tDay[1])<=Integer.parseInt(newDay[1])) {
-					if(Integer.parseInt(tDay[0])<=Integer.parseInt(newDay[0]))continue;
-				}
-			}
-			System.out.println(sb);
-			answer.add(i+1);
+			
 		}
 		return answer.stream().mapToInt(i->i).toArray();
 	}

@@ -1,4 +1,4 @@
-package reg;
+
 
 
 import java.util.ArrayList;
@@ -71,11 +71,30 @@ public class ExpireDate {
 	public static int[] solution(String today, String[] terms, String[] privacies) {
 		ArrayList<Integer> answer = new ArrayList<>();
 
-		String[] tDay = today.split("\\.");
+		int tY = Integer.parseInt(today.substring(0, 4));
+		int tM = Integer.parseInt(today.substring(5, 7));
+		int tD = Integer.parseInt(today.substring(8, 10));
+		int tDay = (28*12*tY)+(28*tM)+tD;
+
 		String[][] terms_1 = Stream.of(terms).map(s->s.split(" ")).toArray(String[][]::new);
 
 		for(int i=0; i<privacies.length; i++) {
+			String[] pri = privacies[i].split(" ");
+			String type = pri[1];
+			int tempDay = 0;
 			
+			for(int j=0; j<terms_1.length; j++) {
+				if(type.equals(terms_1[j][0])) {
+					int tempY = Integer.parseInt(pri[0].substring(0, 4));
+					int tempM = Integer.parseInt(pri[0].substring(5, 7));
+					int tempD = Integer.parseInt(pri[0].substring(8, 10));
+					int ptype = Integer.parseInt(terms_1[j][1]);
+					tempDay = (28*12*tempY)+(28*tempM)+tempD + (28*ptype);
+				}
+			}
+			
+			if(tDay>=tempDay) answer.add(i+1);
+				
 		}
 		return answer.stream().mapToInt(i->i).toArray();
 	}

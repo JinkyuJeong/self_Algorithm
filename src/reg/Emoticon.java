@@ -1,5 +1,6 @@
 package reg;
 
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,42 +43,17 @@ n명의 카카오톡 사용자들에게 이모티콘 m개를 할인하여 판매
 public class Emoticon {	
 	static ArrayList<int[]> tlist = new ArrayList<>();
 	static int[] solution(int[][] users, int[] emoticons) {
-		int[] answer = new int[2];
 		
-		ArrayList<Integer> list = new ArrayList<>();
-		for(int i=0; i<users.length; i++) {
-			list.add(users[i][0]);
-		}
-		int min = ((Collections.min(list)/10)+1)*10;
-		list.clear();
-		while(min<=40) {
-			list.add(min);
-			min+=10;
-		}
-		System.out.println(list);
-		for(int i=0; i<list.size(); i++) {
-			for(int j=0; j<list.size(); j++) {
-				int[] add = {list.get(i), list.get(j)};
-				tlist.add(add);
-			}
-		}
-		for(int i=0; i<tlist.size();i++) {
-			int[] temp = tlist.get(i);
-			int join=0;
-			int amount=0;
-			for(int j=0; j<users.length; j++) {
-				if(users[j][0]>temp[0]) continue;
-				else {
-					
-				}
-			}
-		}
-		
-		return answer;
+		return new int[2];
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		System.out.println(Arrays.toString(solution(new int[][] {{40,10000}, {25,10000}}, 
 																								new int[] {7000,9000})));
+		Toolkit tool = Toolkit.getDefaultToolkit();
+		for(int i=0; i<10; i++) {
+			tool.beep();
+			Thread.sleep(500);
+		}
 	}
 }

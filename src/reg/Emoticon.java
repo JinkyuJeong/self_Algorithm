@@ -43,8 +43,9 @@ public class Emoticon {
 	static int maxSubscribe ;
 	static int maxSale;
 	static int[] disc = {10,20,30,40};
-	static void combine(int[][] users, int[] emoticons, int[] temp, int emoLeng, int cnt) {
-		if(cnt == emoLeng) {
+	static int emoCnt; 
+	static void combine(int[][] users, int[] emoticons, int[] temp, int cnt) {
+		if(cnt == emoCnt) {
 			int tempSubscribe = 0;
 			int tempSale = 0;
 			
@@ -69,12 +70,13 @@ public class Emoticon {
 
 		for(int i=0; i<disc.length; i++) {
 			temp[cnt] = disc[i];
-			combine(users, emoticons, temp, emoLeng, cnt+1);
+			combine(users, emoticons, temp, cnt+1);
 		}
 	}
 	static int[] solution(int[][] users, int[] emoticons) {
 		maxSubscribe = 0; maxSale = 0;
-		combine(users, emoticons, new int[emoticons.length], emoticons.length, 0);
+		emoCnt = emoticons.length;
+		combine(users, emoticons, new int[emoticons.length], 0);
 
 		return IntStream.of(maxSubscribe, maxSale).toArray();
 	}

@@ -1,9 +1,7 @@
 package reg;
 
-import java.awt.Toolkit;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.stream.IntStream;
 
 /*
  * 카카오톡에서는 이모티콘을 무제한으로 사용할 수 있는 이모티콘 플러스 서비스 가입자 수를 늘리려고 합니다.
@@ -40,20 +38,52 @@ n명의 카카오톡 사용자들에게 이모티콘 m개를 할인하여 판매
 따라서, 이모티콘 플러스 서비스 가입자는 1명이 늘어나고 이모티콘 판매액은 5,400원이 늘어나게 됩니다.
 카카오톡 사용자 n명의 구매 기준을 담은 2차원 정수 배열 users, 이모티콘 m개의 정가를 담은 1차원 정수 배열 emoticons가 주어집니다. 
 이때, 행사 목적을 최대한으로 달성했을 때의 이모티콘 플러스 서비스 가입 수와 이모티콘 매출액을 1차원 정수 배열에 담아 return 하도록 solution 함수를 완성해주세요.*/
+
 public class Emoticon {	
-	static ArrayList<int[]> tlist = new ArrayList<>();
-	static int[] solution(int[][] users, int[] emoticons) {
-		
-		return new int[2];
-	}
-	
-	public static void main(String[] args) throws InterruptedException {
-		System.out.println(Arrays.toString(solution(new int[][] {{40,10000}, {25,10000}}, 
-																								new int[] {7000,9000})));
-		Toolkit tool = Toolkit.getDefaultToolkit();
-		for(int i=0; i<10; i++) {
-			tool.beep();
-			Thread.sleep(500);
+	static int maxSubscribe ;
+	static int maxSale;
+	static int[] disc = {10,20,30,40};
+	static void combine(int[][] users, int[] emoticons, int[] temp, int emoLeng, int cnt) {
+		if(cnt == emoLeng) {
+			int tempSubscribe = 0;
+			int tempSale = 0;
+			
+			for(int i=0; i<users.length; i++) {
+				int sale = 0;
+				for(int j=0; j<temp.length; j++) {
+					if(users[i][0] <= temp[j]) 
+						sale += emoticons[j] - (emoticons[j]*((double)temp[j]/100));
+				}
+				
+				if(sale >= users[i][1]) tempSubscribe++;
+				else tempSale += sale;
+			}
+			if(maxSubscribe < tempSubscribe) {
+				maxSubscribe = tempSubscribe;
+				maxSale = tempSale;
+			}
+			else if(maxSubscribe  == tempSubscribe) maxSale = Math.max(tempSale, maxSale);
+			
+			return;
 		}
+
+		for(int i=0; i<disc.length; i++) {
+			temp[cnt] = disc[i];
+			combine(users, emoticons, temp, emoLeng, cnt+1);
+		}
+	}
+	static int[] solution(int[][] users, int[] emoticons) {
+		maxSubscribe = 0; maxSale = 0;
+		combine(users, emoticons, new int[emoticons.length], emoticons.length, 0);
+
+		return IntStream.of(maxSubscribe, maxSale).toArray();
+	}
+
+	public static void main(String[] args) {
+		System.out.println(Arrays.toString(solution(new int[][] {{40,10000}, {25,10000}}, 
+				new int[] {7000,9000}))); // [1, 5400]
+		System.out.println(Arrays.toString(solution(new int[][] {{40, 2900}, {23, 10000}, {11, 5200}, {5, 5900}, {40, 3100}, {27, 9200}, {32, 6900}}, 
+				new int[] {1300, 1500, 1600, 4900})));	// [4, 13860]
+
 	}
 }
